@@ -1,3 +1,5 @@
+// Lo mismo que en la descripcion pero mas compacto
+
 url = "http://localhost:3000"
 
 if (!localStorage.getItem("token")) {
@@ -15,16 +17,6 @@ else{
         }
     }
 }
-
-
-function getParameterByName(name) {
-    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-    results = regex.exec(location.search);
-    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-}
-
-
 
 function id(key){
     return document.getElementById(key)
@@ -69,9 +61,7 @@ function aceptF(){
                         }
                         else{
                             alert(res.data.message)
-                        }
-                    
-                    
+                        }                          
                     }
                 ).catch(
                     function (err){

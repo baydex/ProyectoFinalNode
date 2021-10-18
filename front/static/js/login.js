@@ -1,3 +1,5 @@
+//No ocupo la funcion onload porque use defer
+
 if (!localStorage.getItem("token")) {
     inicio = document.getElementById("inicio")
     inicio.addEventListener("click", login)

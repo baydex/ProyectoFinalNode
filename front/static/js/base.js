@@ -10,7 +10,7 @@ search_bar.addEventListener("blur", function(){
     search_bar.parentElement.parentElement.style.boxShadow = ""
     search_bar.parentElement.parentElement.style.color = "white"
     search_bar.style.color = "white"
-})
+}) //puro rollo visual
 search_bar.addEventListener("focus", function(){
     search_bar.parentElement.parentElement.style.background = "white"
     search_bar.parentElement.parentElement.style.boxShadow = "3px 3px 10px 0px rgba(0,0,0,0.3)"

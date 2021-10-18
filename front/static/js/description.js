@@ -1,9 +1,11 @@
-url = "http://localhost:3000"
+url = "http://localhost:3000" //url base
+
+loadUser() //cargamos a el usuario seleccionado
 
 if (!localStorage.getItem("token")) {
     window.location.href = "login.html"
 }
-else{
+else{  //token y datos del usuario con la sesion activa
     local = localStorage.getItem("token")
     local = JSON.parse(local)
     sesionID = local.user.id
@@ -17,7 +19,7 @@ else{
 }
 
 
-function getParameterByName(name) {
+function getParameterByName(name) { //funcion que jala las variables get de la url
     name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
     var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
     results = regex.exec(location.search);
@@ -25,38 +27,33 @@ function getParameterByName(name) {
 }
 
 
-loadUser()
 
-function id(key){
+function id(key){ //para no hacer document.getElementBy bla bla bla mucho texto mejor una funcion con nombre corto
     return document.getElementById(key)
 }
-function loadUser(){
-    axios.get(url + "/panel/" + getParameterByName("id"), headers).then(
-        function (res){
-            if(res.data.code == 200){
-                message = res.data.message[0]
-                Object.keys(message).forEach(key => {
-                    if(key!="Status"){
 
-                        element = id(key)
-                        element.value = message[key]
-                    }
-                    if(key == "Staff" && message[key] == 1){
+function loadUser(){
+    axios.get(url + "/panel/" + getParameterByName("id"), headers).then( //hacemos una consulta get a la url /panel/id que nos pasa por url get
+        function (res){
+            if(res.data.code == 200){ //si todo sale bien...
+                message = res.data.message[0]  //guardamos el mensaje en una variable
+                Object.keys(message).forEach(key => {  //hacemos for each en las claves de el json que recibimos
+                    if(key == "Staff" && message[key] == 1){ //Si la columna staff vale 1 pues el checkbox lo ponemos palomeado
                         id("Staff").checked = true
                     }
-                    if(message[key] == 0){
+                    if(message[key] == 0){ //si no entonces ocultamos el campo de password, los que no son staff no pueden logear y no necesitan pass 
                         id("password").parentElement.style.display="none"
                     }
                 });
             }
             else{
-                alert(res.data.message)
+                alert(res.data.message) // si algo sale mal en el server lo mostramos
             }
         }
     ).catch(
         function (err){
             console.log(err)
-
+            // F
         }
     )
 }
@@ -64,31 +61,32 @@ function loadUser(){
 edit = id("edit")
 edit.addEventListener("click",editF)
 acept = id("acept")
-acept.addEventListener("click",aceptF)
+acept.addEventListener("click",aceptF)         //muchos botones
 cancel = id("cancel")
 cancel.addEventListener("click",cancelF)
 volver = id("volver")
-volver.addEventListener("click",function(){
+volver.addEventListener("click",function(){ //para volver a el panel principal
     location.href="panel.html"
 })
-staff = id("Staff")
+staff = id("Staff")     //hacemos un evento que este monitoreando si se activa o desactiva la checkbox que hace un usuario admin/staff
 staff.addEventListener("click",checkStaff)
 
-inputs = document.querySelectorAll("input")
-function editF(){
+inputs = document.querySelectorAll("input") //Seleccionamos todos los inputs que tenemos
+
+function editF(){  //Si quiere editar habilitamos todos los inputs menos el de ID 
     inputs.forEach(element => {
         if(element.id != "id"){
 
             element.disabled = false
         }
     });
-    acept.style.display = "block"
+    acept.style.display = "block" //Si estas editando cambian los botones que puedes usar
     cancel.style.display = "block"
     edit.style.display = "none"
 }
 function aceptF(){
     inputs.forEach(element => {
-        element.disabled = true
+        element.disabled = true //SI ya aceptaste primero deshabilitamos y ocultamos los botones
     });    
     acept.style.display = "none"
     cancel.style.display = "none"
@@ -97,22 +95,22 @@ function aceptF(){
         id("Nombre") &&
         id("Apellido") &&
         id("Correo") &&
-        id("Telefono") &&
+        id("Telefono") &&  //checamos que esten llenos los campos
         id("Direccion")    ){
-            if((id("Staff").checked == true && id("password")) || id("Staff").checked == false){
+            if((id("Staff").checked == true && id("password")) || id("Staff").checked == false){ //validacion extra de el password en base a si es staff
                 
                 axios.post(url + "/panel/" + getParameterByName("id"),{
                     Nombre: id("Nombre").value,
                     Apellido: id("Apellido").value,
                     Correo: id("Correo").value,
                     Telefono: id("Telefono").value,
-                    Direccion: id("Direccion").value,
+                    Direccion: id("Direccion").value, //Un super JSON con todos los datos
                     Staff: id("Staff").checked==true? 1: 0,
                     password: id("Staff").checked==true? id("password").value: "",
                 }, headers).then(
                     function (res) {
                         if(res.data.code == 200){
-                            alert("Operacion exitosa")
+                            alert("Operacion exitosa") //Ojala siempre fuera asi, sin errores ni 404s
                         }
                         else{
                             alert(res.data.message)
@@ -130,21 +128,18 @@ function aceptF(){
     }
 }
 function cancelF(){
-    location.href="panel.html"
-    acept.style.display = "none"
-    cancel.style.display = "none"
-    edit.style.display = "block"
+    location.href="panel.html" // Cancelar te regresa al panel principal
 }
 function checkStaff(){
     if(staff.checked == true){
         id("password").parentElement.style.display = "block"
     }
-    else{
+    else{   //Haces visible o invisible en campo de password en base a si haces staff o no al usuario
         id("password").parentElement.style.display = "none"
     }
 }
 
-id("userButton").addEventListener("click",userProfile)
+id("userButton").addEventListener("click",userProfile) //boton que te lleva al perfil de usuario
 
 function userProfile(){
     location.href = "description.html?id="+sesionID   
