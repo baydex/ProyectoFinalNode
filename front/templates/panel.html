@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../static/css/base.css">
+    <link rel="stylesheet" href="../static/css/panel.css">
+    <link rel="stylesheet" href="../static/fonts/styles.css">
+    <script src="../static/js/base.js" defer></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="../static/js/panel.js" defer></script>
+    <link rel="stylesheet" href="../static/icons/styles.css">
+</head>
+<body>
+    <header class="flex">
+        <div class="logo-header center-w flex">
+            <img src="../static/images/logo.png" alt="">
+        </div>
+        <div class="search-header flex center-h center-w">
+            <div class="search-bar flex">
+                <div class="pointer search-icon flex center-w center-h">
+                    <span class="icon-search"></span>
+                </div>
+                <div class="search-input">
+                    <input type="text" name="" id="search-bar">
+                </div>
+                <div class="pointer search-filter-button flex center-w center-h">
+                    <span class="icon-filter"></span>
+                </div>
+            </div>
+        </div>
+        <div class="controls-header flex">
+            <div class="add-user-button flex center-w center-h">
+                <span class="flex center-h center-w icon-plus" id="registerButton"></span>
+            </div>
+            <div class="profile-button flex center-w center-h">
+                <span class="flex center-h center-w icon-user" id="userButton"></span>
+            </div>
+        </div>
+    </header>
+    <main>
+        <table id="tablaEmpleados" class="tablaEmpleados">
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Correo</th>
+                <th>Admin</th>
+            </tr>
+            <!-- <tr class="empleadoFila">
+                <td>1</td>
+                <td>Alejandro Aguilera Olalde</td>
+                <td>dex3a.5@gmail.com</td>
+                <td>v</td>
+            </tr>
+            <tr class="empleadoFila">
+                <td>2</td>
+                <td>Samuel Rangel Cabrera Aguilar</td>
+                <td>dex3a.5@gmail.com</td>
+                <td>x</td>
+            </tr> -->
+        </table>
+    </main>
+    <footer>
+
+    </footer>
+</body>
+</html>

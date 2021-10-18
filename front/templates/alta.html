@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+    <link rel="stylesheet" href="../static/css/base.css">
+    <link rel="stylesheet" href="../static/fonts/styles.css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="../static/icons/styles.css">
+    <script src="../static/js/alta.js" defer></script>
+    <link rel="stylesheet" href="../static/css/alta.css">
+</head>
+<body>
+    <header class="flex">
+        <div class="logo-header center-w flex">
+            <img src="../static/images/logo.png" alt="">
+        </div>
+        <div class="search-header flex center-h center-w">
+            
+        </div>
+        <div class="controls-header flex">
+            <div class="add-user-button flex center-w center-h">
+                
+            </div>
+            <div class="profile-button flex center-w center-h">
+                <span class="flex center-h center-w icon-user" id="userButton"></span>
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class="formulario">
+            <div class="title"><h1>Empleado</h1></div>
+            <div class="contenido">
+
+                
+                <div class="campo">
+                    <p>
+                        <label for="Nombre">Nombre</label>
+                    </p>
+                    <input type="text" name="Nombre" id="Nombre" >
+                </div>
+                <div class="campo">
+                    <p>
+                        <label for="Apellido">Apellido</label>
+                    </p>
+                    <input type="text" name="Apellido" id="Apellido" >
+                </div>
+                <div class="campo">
+                    <p>
+                        <label for="Correo">Correo</label>
+                    </p>
+                    <input type="email" name="Correo" id="Correo" >
+                </div>
+                <div class="campo">
+                    <p>
+                        <label for="Telefono">Telefono</label>
+                    </p>
+                    <input type="text" name="Telefono" id="Telefono" >
+                </div>
+                <div class="campo">
+                    <p>
+                        <label for="Direccion">Direccion</label>
+                    </p>
+                    <input type="text" name="Direccion" id="Direccion" >
+                </div>
+                <div class="campo" style="display: none;">
+                    <p>
+                        <label for="password">Password</label>
+                    </p>
+                    <input type="password" name="password" id="password" >
+                </div>
+                <div class="campo">
+                    <p>
+                        <label for="Staff">Staff</label>
+                    </p>
+                    <input type="checkbox" name="Staff" id="Staff" >
+                </div>
+            </div>
+            <div class="controls">
+                <div class="acept" id="acept">Aceptar</div>
+                <div class="cancel" id="cancel">Cancelar</div>
+                <div class="volver" id="volver">Volver</div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
