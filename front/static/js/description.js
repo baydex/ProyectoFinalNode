@@ -1,6 +1,6 @@
 url = "http://localhost:3000" //url base
 
-loadUser() //cargamos a el usuario seleccionado
+
 
 if (!localStorage.getItem("token")) {
     window.location.href = "login.html"
@@ -13,11 +13,12 @@ else{  //token y datos del usuario con la sesion activa
     sessionToken = local.token
     headers = {
         headers : {
-            'Authorization': `bearer ${sessionToken}`,
+            'Authorization': `bearer ${sessionToken}`
         }
     }
 }
 
+loadUser() //cargamos a el usuario seleccionado
 
 function getParameterByName(name) { //funcion que jala las variables get de la url
     name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
@@ -37,12 +38,16 @@ function loadUser(){
         function (res){
             if(res.data.code == 200){ //si todo sale bien...
                 message = res.data.message[0]  //guardamos el mensaje en una variable
+                console.log(message)
                 Object.keys(message).forEach(key => {  //hacemos for each en las claves de el json que recibimos
                     if(key == "Staff" && message[key] == 1){ //Si la columna staff vale 1 pues el checkbox lo ponemos palomeado
                         id("Staff").checked = true
                     }
                     if(message[key] == 0){ //si no entonces ocultamos el campo de password, los que no son staff no pueden logear y no necesitan pass 
                         id("password").parentElement.style.display="none"
+                    }
+                    if(key != "Staff"){
+                        id(key).value = message[key]
                     }
                 });
             }
