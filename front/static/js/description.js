@@ -57,7 +57,6 @@ function loadUser(){
         }
     ).catch(
         function (err){
-            console.log(err)
             // F
         }
     )
@@ -69,6 +68,8 @@ acept = id("acept")
 acept.addEventListener("click",aceptF)         //muchos botones
 cancel = id("cancel")
 cancel.addEventListener("click",cancelF)
+remove = id("remove")
+remove.addEventListener("click",removeF)
 volver = id("volver")
 volver.addEventListener("click",function(){ //para volver a el panel principal
     location.href="panel.html"
@@ -87,6 +88,7 @@ function editF(){  //Si quiere editar habilitamos todos los inputs menos el de I
     });
     acept.style.display = "block" //Si estas editando cambian los botones que puedes usar
     cancel.style.display = "block"
+    remove.style.display = "block"
     edit.style.display = "none"
 }
 function aceptF(){
@@ -95,6 +97,7 @@ function aceptF(){
     });    
     acept.style.display = "none"
     cancel.style.display = "none"
+    remove.style.display = "none"
     edit.style.display = "block"
     if(id("id") &&
         id("Nombre") &&
@@ -148,4 +151,21 @@ id("userButton").addEventListener("click",userProfile) //boton que te lleva al p
 
 function userProfile(){
     location.href = "description.html?id="+sesionID   
+}
+function removeF(){
+    axios.delete(url + "/panel/" + getParameterByName("id"),headers).then(
+        function (res) {
+            if(res.data.code == 200){
+                alert("Usuario eliminado") //Ojala siempre fuera asi, sin errores ni 404s
+                location.href="panel.html"
+            }
+            else{
+                alert(res.data.message)
+            }
+        }
+    ).catch(
+        function (err){
+            console.log(err)
+        }
+    )
 }
